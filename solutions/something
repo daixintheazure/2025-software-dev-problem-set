@@ -1,0 +1,41 @@
+class Solution {
+    public ArrayList convertString (String str) {
+        ArrayList<String> strArr = new ArrayList<String>();
+        for(int i = 0; i < str.length(); i++){
+            strArr.add(Character.toString(str.charAt(i)));
+        }
+        strArr.sort(null);
+        return strArr;
+    }
+    public boolean isAnagram(String s, String t) {
+
+        ArrayList<String> tempS = convertString(s);
+        //System.out.println(tempS + " " + tempS.size());
+        ArrayList<String> tempT = convertString(t);
+        //System.out.println(tempT + " " + tempT.size());
+
+        if(tempS.size() == tempT.size()){
+            for(int i = 0; i < tempS.size(); i++){
+                //System.out.println(i);
+                if(!tempS.get(i).equals(tempT.get(i))){
+                    return false;
+                }
+            }
+            return true;
+        } else {
+            return false;
+        }
+
+        //System.out.println(s.charAt(1));
+        //ArrayList<String> strArr = new ArrayList<String>();
+        //String temp = s.charAt(1).toString;
+        //strArr.add(Character.toString(s.charAt(0)));
+        //strArr.add(Character.toString(s.charAt(1)));
+        //strArr.add(Character.toString(s.charAt(2)));
+        //System.out.println(strArr.get(0));
+        //System.out.println(strArr);
+       //strArr.sort(null);
+        //System.out.println(strArr);
+    
+    }
+}
