@@ -1,0 +1,80 @@
+public class Solution {
+    public bool IsValidSudoku(char[][] board) {
+         bool[] row = new bool[9];
+         bool[] column = new bool[9];
+         bool[] box = new bool[9];
+        
+        for(int i = 0; i < 9; i++){
+            for(int j = 0; j < 9; j++){
+
+                var index = board[i][j] - '1';
+                
+                if(board[i][j] == '.') continue;
+                
+                if(row[index] == true) {return false;}
+                if(column[index] == true) {return false;}
+
+                var y = j/3 + (i/3)*3;
+                var x = j%3 + (i%3)*3;
+                var boxindex = board[y][x] - '1';
+                
+                if(board[y][x] == '.') continue;
+                if(box[index] == true) {return false;}
+                
+                row[index] = true;
+                column[index] = true;
+                box[boxindex] = true;
+
+            }
+            Array.Clear(row);
+            Array.Clear(column);
+            Array.Clear(box);
+        }
+
+        return true;
+
+        // for(int i = 0; i < 9; i++)
+        // {
+        //     for(int j = 0; j < 9; j++)
+        //     {
+        //         // 1. Checking each cell in each of the nine rows
+        //         if(board[i][j] != '.')
+        //         {
+        //             var index = board[i][j] - '1';
+        //             if(row[index] == true)
+        //                 return false;
+
+        //             row[index] = true;
+        //         }
+
+        //         // 2. Checking each cell in each of the nine columns
+        //         if(board[j][i] != '.')
+        //         {
+        //             var index = board[j][i] - '1';
+        //             if(column[index] == true)
+        //                 return false;
+
+        //             column[index] = true;
+        //         }
+
+        //         // 3. Checking each cell in each of the nine 3x3 sub-boxes of the grid
+        //         var y = j/3 + (i/3)*3;
+        //         var x = j%3 + (i%3)*3;
+        //         if(board[y][x] != '.')
+        //         {
+        //             var index = board[y][x] - '1';
+        //             if(box[index] == true)
+        //                 return false;
+
+        //             box[index] = true;
+        //         }
+        //     }
+
+        //     Array.Clear(row);
+        //     Array.Clear(column);
+        //     Array.Clear(box);
+        // }
+
+        // return true;
+    }
+}
