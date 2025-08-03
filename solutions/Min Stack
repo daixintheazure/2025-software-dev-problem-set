@@ -1,0 +1,36 @@
+public class MinStack {
+    List<int> list = new List<int>();
+
+    public MinStack() {
+        
+    }
+    
+    public void Push(int val) {
+        list.Add(val);
+    }
+    
+    public void Pop() {
+        list.RemoveAt(list.Count()-1);
+    }
+    
+    public int Top() {
+        return list[list.Count()-1];
+    }
+    
+    public int GetMin() {
+        int mi = int.MaxValue;
+        foreach(int u in list){
+            mi=Math.Min(u,mi);
+        }
+        return mi;
+    }
+}
+
+/**
+ * Your MinStack object will be instantiated and called as such:
+ * MinStack obj = new MinStack();
+ * obj.Push(val);
+ * obj.Pop();
+ * int param_3 = obj.Top();
+ * int param_4 = obj.GetMin();
+ */
