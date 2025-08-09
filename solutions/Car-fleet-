@@ -1,0 +1,36 @@
+public int CarFleet(int target, int[] position, int[] speed)
+{
+    int n = position.Length; // number of cars
+    
+    // Array of tuples holding each car's position and speed
+    var cars = new (int pos, int spd)[n];
+    
+    // Pair each position with its corresponding speed
+    for (int i = 0; i < n; i++)
+        cars[i] = (position[i], speed[i]);
+    
+    // Sort cars by position DESCENDING
+    // We process from the car closest to target to farthest
+    Array.Sort(cars, (a, b) => b.pos.CompareTo(a.pos));
+
+    double maxTime = 0; // the slowest arrival time of the current front fleet
+    int fleets = 0;     // number of fleets found
+
+    // Process cars from nearest to farthest
+    foreach (var car in cars)
+    {
+        // Time = distance left / speed
+        double time = (double)(target - car.pos) / car.spd;
+
+        // If this car takes longer than the current front fleet,
+        // it can't catch them — it forms a new fleet.
+        if (time > maxTime)
+        {
+            fleets++;       // New fleet
+            maxTime = time; // Update fleet leader's arrival time
+        }
+        // Else: it will catch up and join the current fleet, do nothing
+    }
+
+    return fleets; // return total fleets
+}
