@@ -1,0 +1,20 @@
+public class Solution {
+    public int[] DailyTemperatures(int[] temperatures) {
+        int n = temperatures.Length; // total number of days
+        int[] answer = new int[n];    // result array, default values = 0
+        Stack<int> stack = new Stack<int>(); // holds indices of days waiting for a warmer day
+
+        for (int i = 0; i < n; i++) {
+            // While the current temperature is warmer than the day at the top of the stack
+            while (stack.Count > 0 && temperatures[i] > temperatures[stack.Peek()]) {
+                int prevIndex = stack.Pop();              // the day we are resolving
+                answer[prevIndex] = i - prevIndex;        // days waited until warmer day
+            }
+            // Push the current day index so we can check it against future days
+            stack.Push(i);
+        }
+
+        // Any days still in the stack remain 0 (no warmer day ahead)
+        return answer;
+    }
+}
