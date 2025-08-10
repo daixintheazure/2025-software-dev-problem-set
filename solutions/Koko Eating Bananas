@@ -1,0 +1,24 @@
+public class Solution {
+    public int MinEatingSpeed(int[] piles, int h) {
+        int low = 1;
+        int high = piles.Max(); // fastest possible speed
+
+        while (low < high) {
+            int mid = (low + high) / 2;
+            if (CanFinish(piles, h, mid)) {
+                high = mid; // try slower speed
+            } else {
+                low = mid + 1; // must go faster
+            }
+        }
+        return low;
+    }
+
+    private bool CanFinish(int[] piles, int h, int k) {
+        int hours = 0;
+        foreach (int pile in piles) {
+            hours += (pile + k - 1) / k; // ceil without floating point
+        }
+        return hours <= h;
+    }
+}
